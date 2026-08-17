@@ -49,7 +49,9 @@ export function useEvaluations() {
     const sync = () => setMap(read());
     sync();
     listeners.add(sync);
-    return () => listeners.delete(sync);
+    return () => {
+      listeners.delete(sync);
+    };
   }, []);
   const save = useCallback((e: Evaluation) => saveEvaluation(e), []);
   return { evaluations: map, save };
