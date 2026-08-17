@@ -69,7 +69,7 @@ export interface Submission {
   strengths: string[];
   concerns: string[];
   similar: SimilarLink[];
-  humanScores?: { judge: string; total: number }[];
+  humanScores?: { judge: string; total: number }[] | undefined;
 }
 
 /* ------------------------------------------------------------------ */
