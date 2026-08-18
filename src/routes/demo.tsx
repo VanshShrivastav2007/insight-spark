@@ -1,3 +1,4 @@
+import type React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Gavel, Trophy, Upload, PlayCircle } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/demo")({
   component: DemoPicker,
 });
 
-const ROLES = [
+const ROLES: { to: "/organizer" | "/judge" | "/participant"; icon: React.ReactNode; name: string; person: string; body: string; featured?: boolean }[] = [
   {
     to: "/organizer",
     icon: <Trophy className="size-5" />,
@@ -45,7 +46,7 @@ const ROLES = [
     person: "Team AgriRecover · IIT Kharagpur",
     body: "Full submission flow with upload progress, submission ID and simulated AI analysis status.",
   },
-] as const;
+];
 
 function DemoPicker() {
   return (
