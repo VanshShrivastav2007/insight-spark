@@ -10,33 +10,271 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as JudgeIndexRouteImport } from './routes/judge.index'
+import { Route as JudgeAnalyticsRouteImport } from './routes/judge.analytics'
+import { Route as JudgeClustersRouteImport } from './routes/judge.clusters'
+import { Route as JudgeEvaluationsRouteImport } from './routes/judge.evaluations'
+import { Route as JudgeGemsRouteImport } from './routes/judge.gems'
+import { Route as JudgeLandscapeRouteImport } from './routes/judge.landscape'
+import { Route as JudgeQueueRouteImport } from './routes/judge.queue'
+import { Route as OrganizerIndexRouteImport } from './routes/organizer.index'
+import { Route as OrganizerAnalyticsRouteImport } from './routes/organizer.analytics'
+import { Route as OrganizerCompetitionsRouteImport } from './routes/organizer.competitions'
+import { Route as OrganizerJudgesRouteImport } from './routes/organizer.judges'
+import { Route as OrganizerSettingsRouteImport } from './routes/organizer.settings'
+import { Route as OrganizerSubmissionsRouteImport } from './routes/organizer.submissions'
+import { Route as ParticipantIndexRouteImport } from './routes/participant.index'
+import { Route as JudgeSubmissionsIndexRouteImport } from './routes/judge.submissions.index'
+import { Route as JudgeSubmissionsIdRouteImport } from './routes/judge.submissions.$id'
+import { Route as OrganizerCompetitionsNewRouteImport } from './routes/organizer.competitions.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeIndexRoute = JudgeIndexRouteImport.update({
+  id: '/judge/',
+  path: '/judge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeAnalyticsRoute = JudgeAnalyticsRouteImport.update({
+  id: '/judge/analytics',
+  path: '/judge/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeClustersRoute = JudgeClustersRouteImport.update({
+  id: '/judge/clusters',
+  path: '/judge/clusters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeEvaluationsRoute = JudgeEvaluationsRouteImport.update({
+  id: '/judge/evaluations',
+  path: '/judge/evaluations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeGemsRoute = JudgeGemsRouteImport.update({
+  id: '/judge/gems',
+  path: '/judge/gems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeLandscapeRoute = JudgeLandscapeRouteImport.update({
+  id: '/judge/landscape',
+  path: '/judge/landscape',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeQueueRoute = JudgeQueueRouteImport.update({
+  id: '/judge/queue',
+  path: '/judge/queue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerIndexRoute = OrganizerIndexRouteImport.update({
+  id: '/organizer/',
+  path: '/organizer/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerAnalyticsRoute = OrganizerAnalyticsRouteImport.update({
+  id: '/organizer/analytics',
+  path: '/organizer/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerCompetitionsRoute = OrganizerCompetitionsRouteImport.update({
+  id: '/organizer/competitions',
+  path: '/organizer/competitions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerJudgesRoute = OrganizerJudgesRouteImport.update({
+  id: '/organizer/judges',
+  path: '/organizer/judges',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerSettingsRoute = OrganizerSettingsRouteImport.update({
+  id: '/organizer/settings',
+  path: '/organizer/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerSubmissionsRoute = OrganizerSubmissionsRouteImport.update({
+  id: '/organizer/submissions',
+  path: '/organizer/submissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParticipantIndexRoute = ParticipantIndexRouteImport.update({
+  id: '/participant/',
+  path: '/participant/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeSubmissionsIndexRoute = JudgeSubmissionsIndexRouteImport.update({
+  id: '/judge/submissions/',
+  path: '/judge/submissions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgeSubmissionsIdRoute = JudgeSubmissionsIdRouteImport.update({
+  id: '/judge/submissions/$id',
+  path: '/judge/submissions/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerCompetitionsNewRoute =
+  OrganizerCompetitionsNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => OrganizerCompetitionsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/demo': typeof DemoRoute
+  '/judge/analytics': typeof JudgeAnalyticsRoute
+  '/judge/clusters': typeof JudgeClustersRoute
+  '/judge/evaluations': typeof JudgeEvaluationsRoute
+  '/judge/gems': typeof JudgeGemsRoute
+  '/judge/landscape': typeof JudgeLandscapeRoute
+  '/judge/queue': typeof JudgeQueueRoute
+  '/organizer/analytics': typeof OrganizerAnalyticsRoute
+  '/organizer/competitions': typeof OrganizerCompetitionsRouteWithChildren
+  '/organizer/judges': typeof OrganizerJudgesRoute
+  '/organizer/settings': typeof OrganizerSettingsRoute
+  '/organizer/submissions': typeof OrganizerSubmissionsRoute
+  '/judge/': typeof JudgeIndexRoute
+  '/organizer/': typeof OrganizerIndexRoute
+  '/participant/': typeof ParticipantIndexRoute
+  '/judge/submissions/$id': typeof JudgeSubmissionsIdRoute
+  '/organizer/competitions/new': typeof OrganizerCompetitionsNewRoute
+  '/judge/submissions/': typeof JudgeSubmissionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/demo': typeof DemoRoute
+  '/judge/analytics': typeof JudgeAnalyticsRoute
+  '/judge/clusters': typeof JudgeClustersRoute
+  '/judge/evaluations': typeof JudgeEvaluationsRoute
+  '/judge/gems': typeof JudgeGemsRoute
+  '/judge/landscape': typeof JudgeLandscapeRoute
+  '/judge/queue': typeof JudgeQueueRoute
+  '/organizer/analytics': typeof OrganizerAnalyticsRoute
+  '/organizer/competitions': typeof OrganizerCompetitionsRouteWithChildren
+  '/organizer/judges': typeof OrganizerJudgesRoute
+  '/organizer/settings': typeof OrganizerSettingsRoute
+  '/organizer/submissions': typeof OrganizerSubmissionsRoute
+  '/judge': typeof JudgeIndexRoute
+  '/organizer': typeof OrganizerIndexRoute
+  '/participant': typeof ParticipantIndexRoute
+  '/judge/submissions/$id': typeof JudgeSubmissionsIdRoute
+  '/organizer/competitions/new': typeof OrganizerCompetitionsNewRoute
+  '/judge/submissions': typeof JudgeSubmissionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/demo': typeof DemoRoute
+  '/judge/analytics': typeof JudgeAnalyticsRoute
+  '/judge/clusters': typeof JudgeClustersRoute
+  '/judge/evaluations': typeof JudgeEvaluationsRoute
+  '/judge/gems': typeof JudgeGemsRoute
+  '/judge/landscape': typeof JudgeLandscapeRoute
+  '/judge/queue': typeof JudgeQueueRoute
+  '/organizer/analytics': typeof OrganizerAnalyticsRoute
+  '/organizer/competitions': typeof OrganizerCompetitionsRouteWithChildren
+  '/organizer/judges': typeof OrganizerJudgesRoute
+  '/organizer/settings': typeof OrganizerSettingsRoute
+  '/organizer/submissions': typeof OrganizerSubmissionsRoute
+  '/judge/': typeof JudgeIndexRoute
+  '/organizer/': typeof OrganizerIndexRoute
+  '/participant/': typeof ParticipantIndexRoute
+  '/judge/submissions/$id': typeof JudgeSubmissionsIdRoute
+  '/organizer/competitions/new': typeof OrganizerCompetitionsNewRoute
+  '/judge/submissions/': typeof JudgeSubmissionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/demo'
+    | '/judge/analytics'
+    | '/judge/clusters'
+    | '/judge/evaluations'
+    | '/judge/gems'
+    | '/judge/landscape'
+    | '/judge/queue'
+    | '/organizer/analytics'
+    | '/organizer/competitions'
+    | '/organizer/judges'
+    | '/organizer/settings'
+    | '/organizer/submissions'
+    | '/judge/'
+    | '/organizer/'
+    | '/participant/'
+    | '/judge/submissions/$id'
+    | '/organizer/competitions/new'
+    | '/judge/submissions/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/demo'
+    | '/judge/analytics'
+    | '/judge/clusters'
+    | '/judge/evaluations'
+    | '/judge/gems'
+    | '/judge/landscape'
+    | '/judge/queue'
+    | '/organizer/analytics'
+    | '/organizer/competitions'
+    | '/organizer/judges'
+    | '/organizer/settings'
+    | '/organizer/submissions'
+    | '/judge'
+    | '/organizer'
+    | '/participant'
+    | '/judge/submissions/$id'
+    | '/organizer/competitions/new'
+    | '/judge/submissions'
+  id:
+    | '__root__'
+    | '/'
+    | '/demo'
+    | '/judge/analytics'
+    | '/judge/clusters'
+    | '/judge/evaluations'
+    | '/judge/gems'
+    | '/judge/landscape'
+    | '/judge/queue'
+    | '/organizer/analytics'
+    | '/organizer/competitions'
+    | '/organizer/judges'
+    | '/organizer/settings'
+    | '/organizer/submissions'
+    | '/judge/'
+    | '/organizer/'
+    | '/participant/'
+    | '/judge/submissions/$id'
+    | '/organizer/competitions/new'
+    | '/judge/submissions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DemoRoute: typeof DemoRoute
+  JudgeAnalyticsRoute: typeof JudgeAnalyticsRoute
+  JudgeClustersRoute: typeof JudgeClustersRoute
+  JudgeEvaluationsRoute: typeof JudgeEvaluationsRoute
+  JudgeGemsRoute: typeof JudgeGemsRoute
+  JudgeLandscapeRoute: typeof JudgeLandscapeRoute
+  JudgeQueueRoute: typeof JudgeQueueRoute
+  OrganizerAnalyticsRoute: typeof OrganizerAnalyticsRoute
+  OrganizerCompetitionsRoute: typeof OrganizerCompetitionsRouteWithChildren
+  OrganizerJudgesRoute: typeof OrganizerJudgesRoute
+  OrganizerSettingsRoute: typeof OrganizerSettingsRoute
+  OrganizerSubmissionsRoute: typeof OrganizerSubmissionsRoute
+  JudgeIndexRoute: typeof JudgeIndexRoute
+  OrganizerIndexRoute: typeof OrganizerIndexRoute
+  ParticipantIndexRoute: typeof ParticipantIndexRoute
+  JudgeSubmissionsIdRoute: typeof JudgeSubmissionsIdRoute
+  JudgeSubmissionsIndexRoute: typeof JudgeSubmissionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +286,167 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/': {
+      id: '/judge/'
+      path: '/judge'
+      fullPath: '/judge/'
+      preLoaderRoute: typeof JudgeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/analytics': {
+      id: '/judge/analytics'
+      path: '/judge/analytics'
+      fullPath: '/judge/analytics'
+      preLoaderRoute: typeof JudgeAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/clusters': {
+      id: '/judge/clusters'
+      path: '/judge/clusters'
+      fullPath: '/judge/clusters'
+      preLoaderRoute: typeof JudgeClustersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/evaluations': {
+      id: '/judge/evaluations'
+      path: '/judge/evaluations'
+      fullPath: '/judge/evaluations'
+      preLoaderRoute: typeof JudgeEvaluationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/gems': {
+      id: '/judge/gems'
+      path: '/judge/gems'
+      fullPath: '/judge/gems'
+      preLoaderRoute: typeof JudgeGemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/landscape': {
+      id: '/judge/landscape'
+      path: '/judge/landscape'
+      fullPath: '/judge/landscape'
+      preLoaderRoute: typeof JudgeLandscapeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/queue': {
+      id: '/judge/queue'
+      path: '/judge/queue'
+      fullPath: '/judge/queue'
+      preLoaderRoute: typeof JudgeQueueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/': {
+      id: '/organizer/'
+      path: '/organizer'
+      fullPath: '/organizer/'
+      preLoaderRoute: typeof OrganizerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/analytics': {
+      id: '/organizer/analytics'
+      path: '/organizer/analytics'
+      fullPath: '/organizer/analytics'
+      preLoaderRoute: typeof OrganizerAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/competitions': {
+      id: '/organizer/competitions'
+      path: '/organizer/competitions'
+      fullPath: '/organizer/competitions'
+      preLoaderRoute: typeof OrganizerCompetitionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/judges': {
+      id: '/organizer/judges'
+      path: '/organizer/judges'
+      fullPath: '/organizer/judges'
+      preLoaderRoute: typeof OrganizerJudgesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/settings': {
+      id: '/organizer/settings'
+      path: '/organizer/settings'
+      fullPath: '/organizer/settings'
+      preLoaderRoute: typeof OrganizerSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/submissions': {
+      id: '/organizer/submissions'
+      path: '/organizer/submissions'
+      fullPath: '/organizer/submissions'
+      preLoaderRoute: typeof OrganizerSubmissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/participant/': {
+      id: '/participant/'
+      path: '/participant'
+      fullPath: '/participant/'
+      preLoaderRoute: typeof ParticipantIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/submissions/': {
+      id: '/judge/submissions/'
+      path: '/judge/submissions'
+      fullPath: '/judge/submissions/'
+      preLoaderRoute: typeof JudgeSubmissionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judge/submissions/$id': {
+      id: '/judge/submissions/$id'
+      path: '/judge/submissions/$id'
+      fullPath: '/judge/submissions/$id'
+      preLoaderRoute: typeof JudgeSubmissionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer/competitions/new': {
+      id: '/organizer/competitions/new'
+      path: '/new'
+      fullPath: '/organizer/competitions/new'
+      preLoaderRoute: typeof OrganizerCompetitionsNewRouteImport
+      parentRoute: typeof OrganizerCompetitionsRoute
+    }
   }
 }
 
+interface OrganizerCompetitionsRouteChildren {
+  OrganizerCompetitionsNewRoute: typeof OrganizerCompetitionsNewRoute
+}
+
+const OrganizerCompetitionsRouteChildren: OrganizerCompetitionsRouteChildren = {
+  OrganizerCompetitionsNewRoute: OrganizerCompetitionsNewRoute,
+}
+
+const OrganizerCompetitionsRouteWithChildren =
+  OrganizerCompetitionsRoute._addFileChildren(
+    OrganizerCompetitionsRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DemoRoute: DemoRoute,
+  JudgeAnalyticsRoute: JudgeAnalyticsRoute,
+  JudgeClustersRoute: JudgeClustersRoute,
+  JudgeEvaluationsRoute: JudgeEvaluationsRoute,
+  JudgeGemsRoute: JudgeGemsRoute,
+  JudgeLandscapeRoute: JudgeLandscapeRoute,
+  JudgeQueueRoute: JudgeQueueRoute,
+  OrganizerAnalyticsRoute: OrganizerAnalyticsRoute,
+  OrganizerCompetitionsRoute: OrganizerCompetitionsRouteWithChildren,
+  OrganizerJudgesRoute: OrganizerJudgesRoute,
+  OrganizerSettingsRoute: OrganizerSettingsRoute,
+  OrganizerSubmissionsRoute: OrganizerSubmissionsRoute,
+  JudgeIndexRoute: JudgeIndexRoute,
+  OrganizerIndexRoute: OrganizerIndexRoute,
+  ParticipantIndexRoute: ParticipantIndexRoute,
+  JudgeSubmissionsIdRoute: JudgeSubmissionsIdRoute,
+  JudgeSubmissionsIndexRoute: JudgeSubmissionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
