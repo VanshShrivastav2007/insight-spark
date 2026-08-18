@@ -20,13 +20,13 @@ import { Route as JudgeLandscapeRouteImport } from './routes/judge.landscape'
 import { Route as JudgeQueueRouteImport } from './routes/judge.queue'
 import { Route as OrganizerIndexRouteImport } from './routes/organizer.index'
 import { Route as OrganizerAnalyticsRouteImport } from './routes/organizer.analytics'
-import { Route as OrganizerCompetitionsRouteImport } from './routes/organizer.competitions'
 import { Route as OrganizerJudgesRouteImport } from './routes/organizer.judges'
 import { Route as OrganizerSettingsRouteImport } from './routes/organizer.settings'
 import { Route as OrganizerSubmissionsRouteImport } from './routes/organizer.submissions'
 import { Route as ParticipantIndexRouteImport } from './routes/participant.index'
 import { Route as JudgeSubmissionsIndexRouteImport } from './routes/judge.submissions.index'
 import { Route as JudgeSubmissionsIdRouteImport } from './routes/judge.submissions.$id'
+import { Route as OrganizerCompetitionsIndexRouteImport } from './routes/organizer.competitions.index'
 import { Route as OrganizerCompetitionsNewRouteImport } from './routes/organizer.competitions.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -84,11 +84,6 @@ const OrganizerAnalyticsRoute = OrganizerAnalyticsRouteImport.update({
   path: '/organizer/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OrganizerCompetitionsRoute = OrganizerCompetitionsRouteImport.update({
-  id: '/organizer/competitions',
-  path: '/organizer/competitions',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OrganizerJudgesRoute = OrganizerJudgesRouteImport.update({
   id: '/organizer/judges',
   path: '/organizer/judges',
@@ -119,11 +114,17 @@ const JudgeSubmissionsIdRoute = JudgeSubmissionsIdRouteImport.update({
   path: '/judge/submissions/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrganizerCompetitionsIndexRoute =
+  OrganizerCompetitionsIndexRouteImport.update({
+    id: '/organizer/competitions/',
+    path: '/organizer/competitions/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const OrganizerCompetitionsNewRoute =
   OrganizerCompetitionsNewRouteImport.update({
-    id: '/new',
-    path: '/new',
-    getParentRoute: () => OrganizerCompetitionsRoute,
+    id: '/organizer/competitions/new',
+    path: '/organizer/competitions/new',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -136,7 +137,6 @@ export interface FileRoutesByFullPath {
   '/judge/landscape': typeof JudgeLandscapeRoute
   '/judge/queue': typeof JudgeQueueRoute
   '/organizer/analytics': typeof OrganizerAnalyticsRoute
-  '/organizer/competitions': typeof OrganizerCompetitionsRouteWithChildren
   '/organizer/judges': typeof OrganizerJudgesRoute
   '/organizer/settings': typeof OrganizerSettingsRoute
   '/organizer/submissions': typeof OrganizerSubmissionsRoute
@@ -146,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/judge/submissions/$id': typeof JudgeSubmissionsIdRoute
   '/organizer/competitions/new': typeof OrganizerCompetitionsNewRoute
   '/judge/submissions/': typeof JudgeSubmissionsIndexRoute
+  '/organizer/competitions/': typeof OrganizerCompetitionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -157,7 +158,6 @@ export interface FileRoutesByTo {
   '/judge/landscape': typeof JudgeLandscapeRoute
   '/judge/queue': typeof JudgeQueueRoute
   '/organizer/analytics': typeof OrganizerAnalyticsRoute
-  '/organizer/competitions': typeof OrganizerCompetitionsRouteWithChildren
   '/organizer/judges': typeof OrganizerJudgesRoute
   '/organizer/settings': typeof OrganizerSettingsRoute
   '/organizer/submissions': typeof OrganizerSubmissionsRoute
@@ -167,6 +167,7 @@ export interface FileRoutesByTo {
   '/judge/submissions/$id': typeof JudgeSubmissionsIdRoute
   '/organizer/competitions/new': typeof OrganizerCompetitionsNewRoute
   '/judge/submissions': typeof JudgeSubmissionsIndexRoute
+  '/organizer/competitions': typeof OrganizerCompetitionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,7 +180,6 @@ export interface FileRoutesById {
   '/judge/landscape': typeof JudgeLandscapeRoute
   '/judge/queue': typeof JudgeQueueRoute
   '/organizer/analytics': typeof OrganizerAnalyticsRoute
-  '/organizer/competitions': typeof OrganizerCompetitionsRouteWithChildren
   '/organizer/judges': typeof OrganizerJudgesRoute
   '/organizer/settings': typeof OrganizerSettingsRoute
   '/organizer/submissions': typeof OrganizerSubmissionsRoute
@@ -189,6 +189,7 @@ export interface FileRoutesById {
   '/judge/submissions/$id': typeof JudgeSubmissionsIdRoute
   '/organizer/competitions/new': typeof OrganizerCompetitionsNewRoute
   '/judge/submissions/': typeof JudgeSubmissionsIndexRoute
+  '/organizer/competitions/': typeof OrganizerCompetitionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -202,7 +203,6 @@ export interface FileRouteTypes {
     | '/judge/landscape'
     | '/judge/queue'
     | '/organizer/analytics'
-    | '/organizer/competitions'
     | '/organizer/judges'
     | '/organizer/settings'
     | '/organizer/submissions'
@@ -212,6 +212,7 @@ export interface FileRouteTypes {
     | '/judge/submissions/$id'
     | '/organizer/competitions/new'
     | '/judge/submissions/'
+    | '/organizer/competitions/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -223,7 +224,6 @@ export interface FileRouteTypes {
     | '/judge/landscape'
     | '/judge/queue'
     | '/organizer/analytics'
-    | '/organizer/competitions'
     | '/organizer/judges'
     | '/organizer/settings'
     | '/organizer/submissions'
@@ -233,6 +233,7 @@ export interface FileRouteTypes {
     | '/judge/submissions/$id'
     | '/organizer/competitions/new'
     | '/judge/submissions'
+    | '/organizer/competitions'
   id:
     | '__root__'
     | '/'
@@ -244,7 +245,6 @@ export interface FileRouteTypes {
     | '/judge/landscape'
     | '/judge/queue'
     | '/organizer/analytics'
-    | '/organizer/competitions'
     | '/organizer/judges'
     | '/organizer/settings'
     | '/organizer/submissions'
@@ -254,6 +254,7 @@ export interface FileRouteTypes {
     | '/judge/submissions/$id'
     | '/organizer/competitions/new'
     | '/judge/submissions/'
+    | '/organizer/competitions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -266,7 +267,6 @@ export interface RootRouteChildren {
   JudgeLandscapeRoute: typeof JudgeLandscapeRoute
   JudgeQueueRoute: typeof JudgeQueueRoute
   OrganizerAnalyticsRoute: typeof OrganizerAnalyticsRoute
-  OrganizerCompetitionsRoute: typeof OrganizerCompetitionsRouteWithChildren
   OrganizerJudgesRoute: typeof OrganizerJudgesRoute
   OrganizerSettingsRoute: typeof OrganizerSettingsRoute
   OrganizerSubmissionsRoute: typeof OrganizerSubmissionsRoute
@@ -274,7 +274,9 @@ export interface RootRouteChildren {
   OrganizerIndexRoute: typeof OrganizerIndexRoute
   ParticipantIndexRoute: typeof ParticipantIndexRoute
   JudgeSubmissionsIdRoute: typeof JudgeSubmissionsIdRoute
+  OrganizerCompetitionsNewRoute: typeof OrganizerCompetitionsNewRoute
   JudgeSubmissionsIndexRoute: typeof JudgeSubmissionsIndexRoute
+  OrganizerCompetitionsIndexRoute: typeof OrganizerCompetitionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -356,13 +358,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrganizerAnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/organizer/competitions': {
-      id: '/organizer/competitions'
-      path: '/organizer/competitions'
-      fullPath: '/organizer/competitions'
-      preLoaderRoute: typeof OrganizerCompetitionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/organizer/judges': {
       id: '/organizer/judges'
       path: '/organizer/judges'
@@ -405,28 +400,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JudgeSubmissionsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/organizer/competitions/': {
+      id: '/organizer/competitions/'
+      path: '/organizer/competitions'
+      fullPath: '/organizer/competitions/'
+      preLoaderRoute: typeof OrganizerCompetitionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/organizer/competitions/new': {
       id: '/organizer/competitions/new'
-      path: '/new'
+      path: '/organizer/competitions/new'
       fullPath: '/organizer/competitions/new'
       preLoaderRoute: typeof OrganizerCompetitionsNewRouteImport
-      parentRoute: typeof OrganizerCompetitionsRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface OrganizerCompetitionsRouteChildren {
-  OrganizerCompetitionsNewRoute: typeof OrganizerCompetitionsNewRoute
-}
-
-const OrganizerCompetitionsRouteChildren: OrganizerCompetitionsRouteChildren = {
-  OrganizerCompetitionsNewRoute: OrganizerCompetitionsNewRoute,
-}
-
-const OrganizerCompetitionsRouteWithChildren =
-  OrganizerCompetitionsRoute._addFileChildren(
-    OrganizerCompetitionsRouteChildren,
-  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -438,7 +427,6 @@ const rootRouteChildren: RootRouteChildren = {
   JudgeLandscapeRoute: JudgeLandscapeRoute,
   JudgeQueueRoute: JudgeQueueRoute,
   OrganizerAnalyticsRoute: OrganizerAnalyticsRoute,
-  OrganizerCompetitionsRoute: OrganizerCompetitionsRouteWithChildren,
   OrganizerJudgesRoute: OrganizerJudgesRoute,
   OrganizerSettingsRoute: OrganizerSettingsRoute,
   OrganizerSubmissionsRoute: OrganizerSubmissionsRoute,
@@ -446,7 +434,9 @@ const rootRouteChildren: RootRouteChildren = {
   OrganizerIndexRoute: OrganizerIndexRoute,
   ParticipantIndexRoute: ParticipantIndexRoute,
   JudgeSubmissionsIdRoute: JudgeSubmissionsIdRoute,
+  OrganizerCompetitionsNewRoute: OrganizerCompetitionsNewRoute,
   JudgeSubmissionsIndexRoute: JudgeSubmissionsIndexRoute,
+  OrganizerCompetitionsIndexRoute: OrganizerCompetitionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
