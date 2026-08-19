@@ -177,7 +177,7 @@ function Landing() {
                 <Link to="/organizer/competitions/new">Create Competition</Link>
               </Button>
               <Button asChild size="lg" variant="ghost">
-                <Link to="/judge">
+                <Link to="/login">
                   <PlayCircle className="size-4" /> View Product Demo
                 </Link>
               </Button>

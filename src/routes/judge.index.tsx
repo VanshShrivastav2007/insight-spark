@@ -4,6 +4,7 @@ import { AppShell } from "@/components/app/AppShell";
 import { SectionHeading, StatCard, GemBadge, AiNote } from "@/components/app/primitives";
 import { CategoryChart, SignalDistributionChart } from "@/components/app/charts";
 import { SubmissionCard } from "@/components/app/SubmissionCard";
+import { ReviewLens, WhatYouMightMiss } from "@/components/app/ReviewLens";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { HIDDEN_GEMS, SATURATION_BOARD, STATS, SUBMISSIONS } from "@/lib/demo-data";
@@ -108,6 +109,11 @@ function JudgeHome() {
             <Link to="/judge/gems">See all {STATS.hiddenGems} potential hidden gems</Link>
           </Button>
         </section>
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <ReviewLens />
+        <WhatYouMightMiss />
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">

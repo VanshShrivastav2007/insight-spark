@@ -33,6 +33,8 @@ import {
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { NOTIFICATIONS } from "@/lib/demo-data";
+import { useJudgeSession } from "@/lib/judge-auth";
+import { useNavigate } from "@tanstack/react-router";
 
 export type Role = "judge" | "organizer" | "participant";
 
@@ -45,6 +47,7 @@ interface NavItem {
 const NAV: Record<Role, NavItem[]> = {
   judge: [
     { label: "Overview", to: "/judge", icon: <LayoutDashboard className="size-4" /> },
+    { label: "Your Competitions", to: "/judge/competitions", icon: <Trophy className="size-4" /> },
     { label: "Priority Queue", to: "/judge/queue", icon: <ListOrdered className="size-4" /> },
     { label: "All Submissions", to: "/judge/submissions", icon: <FileStack className="size-4" /> },
     { label: "Submission Landscape", to: "/judge/landscape", icon: <MapIcon className="size-4" /> },
@@ -129,7 +132,13 @@ export function AppShell({
   onSearchChange?: (v: string) => void;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const meta = ROLE_LABEL[role];
+  const navigate = useNavigate();
+  const { judge, competition, competitions, selectCompetition, signOut } = useJudgeSession();
+  const isJudge = role === "judge";
+  const meta =
+    isJudge && judge
+      ? { name: judge.affiliation, person: judge.name, initials: judge.initials }
+      : ROLE_LABEL[role];
 
   return (
     <div className="min-h-screen bg-soft-gradient">
@@ -175,16 +184,31 @@ export function AppShell({
             <div className="flex-1 md:hidden" />
 
             <div className="hidden lg:block">
-              <Select defaultValue="hacksort-2026">
-                <SelectTrigger className="h-10 w-56 rounded-xl" aria-label="Competition selector">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="hacksort-2026">National Innovation Hack 2026</SelectItem>
-                  <SelectItem value="climate-jam">Climate Jam — Spring</SelectItem>
-                  <SelectItem value="civic-sprint">Civic Tech Sprint</SelectItem>
-                </SelectContent>
-              </Select>
+              {isJudge && competitions.length ? (
+                <Select value={competition?.id ?? competitions[0]!.id} onValueChange={(v) => selectCompetition(v)}>
+                  <SelectTrigger className="h-10 w-64 rounded-xl" aria-label="Competition selector">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {competitions.map((c) => (
+                      <SelectItem key={c.id} value={c.id}>
+                        {c.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <Select defaultValue="hacksort-2026">
+                  <SelectTrigger className="h-10 w-56 rounded-xl" aria-label="Competition selector">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="hacksort-2026">National Innovation Hack 2026</SelectItem>
+                    <SelectItem value="climate-jam">Climate Jam — Spring</SelectItem>
+                    <SelectItem value="civic-sprint">Civic Tech Sprint</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
             </div>
 
             <Popover>
@@ -231,8 +255,26 @@ export function AppShell({
               </PopoverTrigger>
               <PopoverContent align="end" className="w-56 text-sm">
                 <p className="font-semibold">{meta.person}</p>
-                <p className="text-xs text-muted-foreground">{meta.name} · demo account</p>
+                <p className="text-xs text-muted-foreground">
+                  {isJudge && competition ? competition.name : meta.name} · demo account
+                </p>
                 <div className="mt-3 flex flex-col gap-1">
+                  {isJudge ? (
+                    <>
+                      <Link to="/judge/competitions" className="rounded-md px-2 py-1.5 hover:bg-secondary">
+                        Switch competition
+                      </Link>
+                      <button
+                        className="rounded-md px-2 py-1.5 text-left hover:bg-secondary"
+                        onClick={() => {
+                          signOut();
+                          navigate({ to: "/login" });
+                        }}
+                      >
+                        Sign out
+                      </button>
+                    </>
+                  ) : null}
                   <Link to="/demo" className="rounded-md px-2 py-1.5 hover:bg-secondary">
                     Switch role
                   </Link>

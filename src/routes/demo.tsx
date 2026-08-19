@@ -122,7 +122,7 @@ function DemoPicker() {
             ))}
           </ol>
           <Button asChild className="mt-5">
-            <Link to="/judge">
+            <Link to="/login">
               Start the guided flow <ArrowRight className="size-4" />
             </Link>
           </Button>

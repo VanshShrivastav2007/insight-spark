@@ -3,6 +3,7 @@ import { Flame, Sprout, Scale } from "lucide-react";
 import { AppShell } from "@/components/app/AppShell";
 import { AiNote, SaturationBadge, SectionHeading, StatCard } from "@/components/app/primitives";
 import { SaturationChart, InnovationVsPresentationScatter, CategoryChart } from "@/components/app/charts";
+import { CategoryLandscape } from "@/components/app/CategoryLandscape";
 import { SATURATION_BOARD, type ProblemArea } from "@/lib/demo-data";
 
 export const Route = createFileRoute("/judge/landscape")({
@@ -71,6 +72,10 @@ function LandscapePage() {
         <StatCard label="Highly saturated areas" value={saturated.length} tone="warning" icon={<Flame className="size-4" />} />
         <StatCard label="Medium density areas" value={medium.length} icon={<Scale className="size-4" />} />
         <StatCard label="Underexplored areas" value={underexplored.length} tone="success" icon={<Sprout className="size-4" />} />
+      </div>
+
+      <div className="mt-4">
+        <CategoryLandscape />
       </div>
 
       <div className="mt-4 grid gap-4">
