@@ -47,6 +47,7 @@ interface NavItem {
 const NAV: Record<Role, NavItem[]> = {
   judge: [
     { label: "Overview", to: "/judge", icon: <LayoutDashboard className="size-4" /> },
+    { label: "Your Competitions", to: "/judge/competitions", icon: <Trophy className="size-4" /> },
     { label: "Priority Queue", to: "/judge/queue", icon: <ListOrdered className="size-4" /> },
     { label: "All Submissions", to: "/judge/submissions", icon: <FileStack className="size-4" /> },
     { label: "Submission Landscape", to: "/judge/landscape", icon: <MapIcon className="size-4" /> },
