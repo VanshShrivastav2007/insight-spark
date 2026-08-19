@@ -2,7 +2,21 @@ import type { ReactNode } from "react";
 import { Info, Sparkles, ShieldCheck, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip as TooltipRoot,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+/** Self-contained tooltip so any card can be rendered without an ancestor provider. */
+function Tooltip({ children }: { children: ReactNode }) {
+  return (
+    <TooltipProvider delayDuration={150}>
+      <TooltipRoot>{children}</TooltipRoot>
+    </TooltipProvider>
+  );
+}
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Priority, Saturation } from "@/lib/demo-data";
 
