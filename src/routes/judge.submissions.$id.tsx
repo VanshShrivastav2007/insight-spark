@@ -7,6 +7,8 @@ import { EvaluationForm } from "@/components/app/EvaluationForm";
 import { PptViewer } from "@/components/app/PptViewer";
 import { CompareDialog } from "@/components/app/CompareDialog";
 import { QualityVsPresentation } from "@/components/app/QualityVsPresentation";
+import { GemEvidencePanel, isPotentialGem } from "@/components/app/GemEvidence";
+import { DecisionPanel } from "@/components/app/DecisionPanel";
 import { GemBadge, PriorityBadge } from "@/components/app/primitives";
 import { Button } from "@/components/ui/button";
 import { getSubmission, SUBMISSIONS } from "@/lib/demo-data";
@@ -56,7 +58,7 @@ function SubmissionDetail() {
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-semibold tracking-tight">{submission.team}</h1>
               <PriorityBadge priority={submission.priority} />
-              {submission.hiddenGem ? <GemBadge /> : null}
+              {isPotentialGem(submission) ? <GemBadge /> : null}
             </div>
             <p className="mt-1 text-sm text-muted-foreground">{submission.project}</p>
             <p className="mt-1 text-xs text-muted-foreground">
@@ -95,9 +97,11 @@ function SubmissionDetail() {
       <div className="mt-4 grid gap-4 xl:grid-cols-[1fr_380px]">
         <div className="space-y-4">
           <AiAnalysisPanel submission={submission} />
+          {isPotentialGem(submission) ? <GemEvidencePanel submission={submission} /> : null}
           <QualityVsPresentation submission={submission} />
         </div>
         <div className="space-y-4">
+          <DecisionPanel submission={submission} />
           <EvaluationForm submission={submission} />
           <section className="card-surface p-5">
             <h2 className="text-sm font-semibold">Similar submissions</h2>
