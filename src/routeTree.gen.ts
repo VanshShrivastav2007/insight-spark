@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as JudgeIndexRouteImport } from './routes/judge.index'
 import { Route as JudgeAnalyticsRouteImport } from './routes/judge.analytics'
 import { Route as JudgeClustersRouteImport } from './routes/judge.clusters'
+import { Route as JudgeCompetitionsRouteImport } from './routes/judge.competitions'
 import { Route as JudgeEvaluationsRouteImport } from './routes/judge.evaluations'
 import { Route as JudgeGemsRouteImport } from './routes/judge.gems'
 import { Route as JudgeLandscapeRouteImport } from './routes/judge.landscape'
@@ -64,6 +65,11 @@ const JudgeAnalyticsRoute = JudgeAnalyticsRouteImport.update({
 const JudgeClustersRoute = JudgeClustersRouteImport.update({
   id: '/clusters',
   path: '/clusters',
+  getParentRoute: () => JudgeRoute,
+} as any)
+const JudgeCompetitionsRoute = JudgeCompetitionsRouteImport.update({
+  id: '/competitions',
+  path: '/competitions',
   getParentRoute: () => JudgeRoute,
 } as any)
 const JudgeEvaluationsRoute = JudgeEvaluationsRouteImport.update({
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/judge/analytics': typeof JudgeAnalyticsRoute
   '/judge/clusters': typeof JudgeClustersRoute
+  '/judge/competitions': typeof JudgeCompetitionsRoute
   '/judge/evaluations': typeof JudgeEvaluationsRoute
   '/judge/gems': typeof JudgeGemsRoute
   '/judge/landscape': typeof JudgeLandscapeRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/judge/analytics': typeof JudgeAnalyticsRoute
   '/judge/clusters': typeof JudgeClustersRoute
+  '/judge/competitions': typeof JudgeCompetitionsRoute
   '/judge/evaluations': typeof JudgeEvaluationsRoute
   '/judge/gems': typeof JudgeGemsRoute
   '/judge/landscape': typeof JudgeLandscapeRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/judge/analytics': typeof JudgeAnalyticsRoute
   '/judge/clusters': typeof JudgeClustersRoute
+  '/judge/competitions': typeof JudgeCompetitionsRoute
   '/judge/evaluations': typeof JudgeEvaluationsRoute
   '/judge/gems': typeof JudgeGemsRoute
   '/judge/landscape': typeof JudgeLandscapeRoute
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/judge/analytics'
     | '/judge/clusters'
+    | '/judge/competitions'
     | '/judge/evaluations'
     | '/judge/gems'
     | '/judge/landscape'
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/judge/analytics'
     | '/judge/clusters'
+    | '/judge/competitions'
     | '/judge/evaluations'
     | '/judge/gems'
     | '/judge/landscape'
@@ -262,6 +273,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/judge/analytics'
     | '/judge/clusters'
+    | '/judge/competitions'
     | '/judge/evaluations'
     | '/judge/gems'
     | '/judge/landscape'
@@ -343,6 +355,13 @@ declare module '@tanstack/react-router' {
       path: '/clusters'
       fullPath: '/judge/clusters'
       preLoaderRoute: typeof JudgeClustersRouteImport
+      parentRoute: typeof JudgeRoute
+    }
+    '/judge/competitions': {
+      id: '/judge/competitions'
+      path: '/competitions'
+      fullPath: '/judge/competitions'
+      preLoaderRoute: typeof JudgeCompetitionsRouteImport
       parentRoute: typeof JudgeRoute
     }
     '/judge/evaluations': {
@@ -449,6 +468,7 @@ declare module '@tanstack/react-router' {
 interface JudgeRouteChildren {
   JudgeAnalyticsRoute: typeof JudgeAnalyticsRoute
   JudgeClustersRoute: typeof JudgeClustersRoute
+  JudgeCompetitionsRoute: typeof JudgeCompetitionsRoute
   JudgeEvaluationsRoute: typeof JudgeEvaluationsRoute
   JudgeGemsRoute: typeof JudgeGemsRoute
   JudgeLandscapeRoute: typeof JudgeLandscapeRoute
@@ -461,6 +481,7 @@ interface JudgeRouteChildren {
 const JudgeRouteChildren: JudgeRouteChildren = {
   JudgeAnalyticsRoute: JudgeAnalyticsRoute,
   JudgeClustersRoute: JudgeClustersRoute,
+  JudgeCompetitionsRoute: JudgeCompetitionsRoute,
   JudgeEvaluationsRoute: JudgeEvaluationsRoute,
   JudgeGemsRoute: JudgeGemsRoute,
   JudgeLandscapeRoute: JudgeLandscapeRoute,
