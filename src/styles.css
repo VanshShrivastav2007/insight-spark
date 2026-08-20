@@ -182,3 +182,54 @@
     linear-gradient(90deg, oklch(1 0 0 / 0.035) 1px, transparent 1px);
   background-size: 56px 56px;
 }
+
+/* Ambient AI Neural Wave background */
+.neural-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.neural-glow-a {
+  top: -12%;
+  left: -6%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle, oklch(0.55 0.18 272 / 0.32) 0%, transparent 68%);
+  animation: neural-drift-a 46s ease-in-out infinite alternate;
+}
+
+.neural-glow-b {
+  bottom: -18%;
+  right: -8%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle, oklch(0.58 0.16 305 / 0.28) 0%, transparent 68%);
+  animation: neural-drift-b 58s ease-in-out infinite alternate;
+}
+
+@keyframes neural-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(6vw, 5vh, 0) scale(1.12);
+  }
+}
+
+@keyframes neural-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+  to {
+    transform: translate3d(-5vw, -6vh, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neural-glow {
+    animation: none;
+  }
+}
