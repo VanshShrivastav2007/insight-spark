@@ -141,7 +141,7 @@ export function AppShell({
       : ROLE_LABEL[role];
 
   return (
-    <div className="min-h-screen bg-soft-gradient">
+    <div className="min-h-screen">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col bg-sidebar py-5 lg:flex">
         <div className="px-5 pb-6">
           <Link to="/" aria-label="HackSort AI home">

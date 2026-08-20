@@ -70,7 +70,7 @@ function LoginPage() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-soft-gradient">
+    <main className="relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-grid-faint opacity-40" aria-hidden />
       <div className="relative mx-auto grid min-h-screen w-full max-w-6xl items-center gap-10 px-5 py-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
         <section className="hidden lg:block">

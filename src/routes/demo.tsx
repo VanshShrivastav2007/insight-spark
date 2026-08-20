@@ -50,7 +50,7 @@ const ROLES: { to: "/organizer" | "/judge" | "/participant"; icon: React.ReactNo
 
 function DemoPicker() {
   return (
-    <div className="min-h-screen bg-soft-gradient">
+    <div className="min-h-screen">
       <header className="border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-5xl items-center px-4 sm:px-6">
           <Link to="/" aria-label="HackSort AI home">
