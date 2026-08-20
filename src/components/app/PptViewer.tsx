@@ -44,7 +44,7 @@ export function PptViewer({ team, trigger }: { team: string; trigger: ReactNode 
       name: file.name,
       type: file.type || "application/octet-stream",
       size: file.size,
-      url: URL createObjectURLSafe(file),
+      url: URL.createObjectURL(file),
     }));
     const next = [...uploads, ...added];
     persist(next);
