@@ -14,6 +14,7 @@ import {
   PlayCircle,
 } from "lucide-react";
 import { Logo, LogoMark } from "@/components/brand/Logo";
+import { RoleNav } from "@/components/app/RoleNav";
 import { Button } from "@/components/ui/button";
 import { STATS } from "@/lib/demo-data";
 
@@ -148,7 +149,8 @@ function Landing() {
               Human-in-the-loop
             </a>
           </nav>
-          <Button asChild size="sm" className="ml-auto md:ml-0">
+          <RoleNav className="ml-auto md:ml-4" />
+          <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link to="/demo">Try Interactive Demo</Link>
           </Button>
         </div>
