@@ -3,6 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { ArrowRight, KeyRound, Loader2, Lock, Mail, ShieldCheck, Ticket } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
+import { RoleNav } from "@/components/app/RoleNav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -102,7 +103,9 @@ function LoginPage() {
           <div className="lg:hidden">
             <Logo />
           </div>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight lg:mt-0">Welcome back</h2>
+          <RoleNav className="mt-4 lg:mt-0" />
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight">Judge Login</h2>
+          <p className="text-sm text-muted-foreground">Welcome back</p>
           <p className="mt-1 text-sm text-muted-foreground">Sign in to your judge workspace.</p>
 
           <form className="mt-6 space-y-4" onSubmit={submit}>

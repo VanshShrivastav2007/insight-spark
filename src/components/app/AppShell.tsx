@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
+import { RoleNav } from "@/components/app/RoleNav";
 import {
   Bell,
   LayoutDashboard,
@@ -182,6 +183,8 @@ export function AppShell({
               />
             </div>
             <div className="flex-1 md:hidden" />
+
+            <RoleNav className="hidden xl:inline-flex" />
 
             <div className="hidden lg:block">
               {isJudge && competitions.length ? (

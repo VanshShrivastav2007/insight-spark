@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as JudgeRouteImport } from './routes/judge'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as OrganizerRouteImport } from './routes/organizer'
+import { Route as OrganizerLoginRouteImport } from './routes/organizer-login'
 import { Route as JudgeIndexRouteImport } from './routes/judge.index'
 import { Route as JudgeAnalyticsRouteImport } from './routes/judge.analytics'
 import { Route as JudgeClustersRouteImport } from './routes/judge.clusters'
@@ -50,6 +52,16 @@ const JudgeRoute = JudgeRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerRoute = OrganizerRouteImport.update({
+  id: '/organizer',
+  path: '/organizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizerLoginRoute = OrganizerLoginRouteImport.update({
+  id: '/organizer-login',
+  path: '/organizer-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JudgeIndexRoute = JudgeIndexRouteImport.update({
@@ -93,29 +105,29 @@ const JudgeQueueRoute = JudgeQueueRouteImport.update({
   getParentRoute: () => JudgeRoute,
 } as any)
 const OrganizerIndexRoute = OrganizerIndexRouteImport.update({
-  id: '/organizer/',
-  path: '/organizer/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrganizerRoute,
 } as any)
 const OrganizerAnalyticsRoute = OrganizerAnalyticsRouteImport.update({
-  id: '/organizer/analytics',
-  path: '/organizer/analytics',
-  getParentRoute: () => rootRouteImport,
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => OrganizerRoute,
 } as any)
 const OrganizerJudgesRoute = OrganizerJudgesRouteImport.update({
-  id: '/organizer/judges',
-  path: '/organizer/judges',
-  getParentRoute: () => rootRouteImport,
+  id: '/judges',
+  path: '/judges',
+  getParentRoute: () => OrganizerRoute,
 } as any)
 const OrganizerSettingsRoute = OrganizerSettingsRouteImport.update({
-  id: '/organizer/settings',
-  path: '/organizer/settings',
-  getParentRoute: () => rootRouteImport,
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => OrganizerRoute,
 } as any)
 const OrganizerSubmissionsRoute = OrganizerSubmissionsRouteImport.update({
-  id: '/organizer/submissions',
-  path: '/organizer/submissions',
-  getParentRoute: () => rootRouteImport,
+  id: '/submissions',
+  path: '/submissions',
+  getParentRoute: () => OrganizerRoute,
 } as any)
 const ParticipantIndexRoute = ParticipantIndexRouteImport.update({
   id: '/participant/',
@@ -134,15 +146,15 @@ const JudgeSubmissionsIdRoute = JudgeSubmissionsIdRouteImport.update({
 } as any)
 const OrganizerCompetitionsIndexRoute =
   OrganizerCompetitionsIndexRouteImport.update({
-    id: '/organizer/competitions/',
-    path: '/organizer/competitions/',
-    getParentRoute: () => rootRouteImport,
+    id: '/competitions/',
+    path: '/competitions/',
+    getParentRoute: () => OrganizerRoute,
   } as any)
 const OrganizerCompetitionsNewRoute =
   OrganizerCompetitionsNewRouteImport.update({
-    id: '/organizer/competitions/new',
-    path: '/organizer/competitions/new',
-    getParentRoute: () => rootRouteImport,
+    id: '/competitions/new',
+    path: '/competitions/new',
+    getParentRoute: () => OrganizerRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -150,6 +162,8 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/judge': typeof JudgeRouteWithChildren
   '/login': typeof LoginRoute
+  '/organizer': typeof OrganizerRouteWithChildren
+  '/organizer-login': typeof OrganizerLoginRoute
   '/judge/analytics': typeof JudgeAnalyticsRoute
   '/judge/clusters': typeof JudgeClustersRoute
   '/judge/competitions': typeof JudgeCompetitionsRoute
@@ -173,6 +187,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
+  '/organizer-login': typeof OrganizerLoginRoute
   '/judge/analytics': typeof JudgeAnalyticsRoute
   '/judge/clusters': typeof JudgeClustersRoute
   '/judge/competitions': typeof JudgeCompetitionsRoute
@@ -198,6 +213,8 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/judge': typeof JudgeRouteWithChildren
   '/login': typeof LoginRoute
+  '/organizer': typeof OrganizerRouteWithChildren
+  '/organizer-login': typeof OrganizerLoginRoute
   '/judge/analytics': typeof JudgeAnalyticsRoute
   '/judge/clusters': typeof JudgeClustersRoute
   '/judge/competitions': typeof JudgeCompetitionsRoute
@@ -224,6 +241,8 @@ export interface FileRouteTypes {
     | '/demo'
     | '/judge'
     | '/login'
+    | '/organizer'
+    | '/organizer-login'
     | '/judge/analytics'
     | '/judge/clusters'
     | '/judge/competitions'
@@ -247,6 +266,7 @@ export interface FileRouteTypes {
     | '/'
     | '/demo'
     | '/login'
+    | '/organizer-login'
     | '/judge/analytics'
     | '/judge/clusters'
     | '/judge/competitions'
@@ -271,6 +291,8 @@ export interface FileRouteTypes {
     | '/demo'
     | '/judge'
     | '/login'
+    | '/organizer'
+    | '/organizer-login'
     | '/judge/analytics'
     | '/judge/clusters'
     | '/judge/competitions'
@@ -296,14 +318,9 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   JudgeRoute: typeof JudgeRouteWithChildren
   LoginRoute: typeof LoginRoute
-  OrganizerAnalyticsRoute: typeof OrganizerAnalyticsRoute
-  OrganizerJudgesRoute: typeof OrganizerJudgesRoute
-  OrganizerSettingsRoute: typeof OrganizerSettingsRoute
-  OrganizerSubmissionsRoute: typeof OrganizerSubmissionsRoute
-  OrganizerIndexRoute: typeof OrganizerIndexRoute
+  OrganizerRoute: typeof OrganizerRouteWithChildren
+  OrganizerLoginRoute: typeof OrganizerLoginRoute
   ParticipantIndexRoute: typeof ParticipantIndexRoute
-  OrganizerCompetitionsNewRoute: typeof OrganizerCompetitionsNewRoute
-  OrganizerCompetitionsIndexRoute: typeof OrganizerCompetitionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -334,6 +351,20 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer': {
+      id: '/organizer'
+      path: '/organizer'
+      fullPath: '/organizer'
+      preLoaderRoute: typeof OrganizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizer-login': {
+      id: '/organizer-login'
+      path: '/organizer-login'
+      fullPath: '/organizer-login'
+      preLoaderRoute: typeof OrganizerLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/judge/': {
@@ -394,38 +425,38 @@ declare module '@tanstack/react-router' {
     }
     '/organizer/': {
       id: '/organizer/'
-      path: '/organizer'
+      path: '/'
       fullPath: '/organizer/'
       preLoaderRoute: typeof OrganizerIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
     '/organizer/analytics': {
       id: '/organizer/analytics'
-      path: '/organizer/analytics'
+      path: '/analytics'
       fullPath: '/organizer/analytics'
       preLoaderRoute: typeof OrganizerAnalyticsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
     '/organizer/judges': {
       id: '/organizer/judges'
-      path: '/organizer/judges'
+      path: '/judges'
       fullPath: '/organizer/judges'
       preLoaderRoute: typeof OrganizerJudgesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
     '/organizer/settings': {
       id: '/organizer/settings'
-      path: '/organizer/settings'
+      path: '/settings'
       fullPath: '/organizer/settings'
       preLoaderRoute: typeof OrganizerSettingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
     '/organizer/submissions': {
       id: '/organizer/submissions'
-      path: '/organizer/submissions'
+      path: '/submissions'
       fullPath: '/organizer/submissions'
       preLoaderRoute: typeof OrganizerSubmissionsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
     '/participant/': {
       id: '/participant/'
@@ -450,17 +481,17 @@ declare module '@tanstack/react-router' {
     }
     '/organizer/competitions/': {
       id: '/organizer/competitions/'
-      path: '/organizer/competitions'
+      path: '/competitions'
       fullPath: '/organizer/competitions/'
       preLoaderRoute: typeof OrganizerCompetitionsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
     '/organizer/competitions/new': {
       id: '/organizer/competitions/new'
-      path: '/organizer/competitions/new'
+      path: '/competitions/new'
       fullPath: '/organizer/competitions/new'
       preLoaderRoute: typeof OrganizerCompetitionsNewRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrganizerRoute
     }
   }
 }
@@ -493,19 +524,38 @@ const JudgeRouteChildren: JudgeRouteChildren = {
 
 const JudgeRouteWithChildren = JudgeRoute._addFileChildren(JudgeRouteChildren)
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  DemoRoute: DemoRoute,
-  JudgeRoute: JudgeRouteWithChildren,
-  LoginRoute: LoginRoute,
+interface OrganizerRouteChildren {
+  OrganizerAnalyticsRoute: typeof OrganizerAnalyticsRoute
+  OrganizerJudgesRoute: typeof OrganizerJudgesRoute
+  OrganizerSettingsRoute: typeof OrganizerSettingsRoute
+  OrganizerSubmissionsRoute: typeof OrganizerSubmissionsRoute
+  OrganizerIndexRoute: typeof OrganizerIndexRoute
+  OrganizerCompetitionsNewRoute: typeof OrganizerCompetitionsNewRoute
+  OrganizerCompetitionsIndexRoute: typeof OrganizerCompetitionsIndexRoute
+}
+
+const OrganizerRouteChildren: OrganizerRouteChildren = {
   OrganizerAnalyticsRoute: OrganizerAnalyticsRoute,
   OrganizerJudgesRoute: OrganizerJudgesRoute,
   OrganizerSettingsRoute: OrganizerSettingsRoute,
   OrganizerSubmissionsRoute: OrganizerSubmissionsRoute,
   OrganizerIndexRoute: OrganizerIndexRoute,
-  ParticipantIndexRoute: ParticipantIndexRoute,
   OrganizerCompetitionsNewRoute: OrganizerCompetitionsNewRoute,
   OrganizerCompetitionsIndexRoute: OrganizerCompetitionsIndexRoute,
+}
+
+const OrganizerRouteWithChildren = OrganizerRoute._addFileChildren(
+  OrganizerRouteChildren,
+)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  DemoRoute: DemoRoute,
+  JudgeRoute: JudgeRouteWithChildren,
+  LoginRoute: LoginRoute,
+  OrganizerRoute: OrganizerRouteWithChildren,
+  OrganizerLoginRoute: OrganizerLoginRoute,
+  ParticipantIndexRoute: ParticipantIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
